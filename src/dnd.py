@@ -1,3 +1,5 @@
+import random
+
 #ask to fully random generate or input fields
 
 #if random generate
