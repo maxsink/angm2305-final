@@ -8,19 +8,45 @@ def main():
         print() #for cleanliness
         choice = input(f"{start_msg}").lower()
         if choice == "r":
-            random_generate
+            random_generate()
         elif choice == "i":
-            input_fields
+            input_fields()
         else:
             print("Invalid input. Please try again")
 
 
+def get_txt_from_file(filename):
+    try:
+        file = open(filename, 'r')
+        lines = file.readlines()
+        return [line.strip() for line in lines if line.strip()]
+    except FileNotFoundError:
+         file = open(filename, 'w')
+    finally:
+        file.close()
+
+
+#collect generation & store
 def random_generate():
-    #if random generate
+     random_race()
+     random_alignment()
+     random_class()
+
+def random_race(races):
         #random choose race 
+        races = get_txt_from_file("races.txt")
+        return random.choice(races)
+
+def random_alignment(alignments):
+        #random choose alignments 
+        alignments = get_txt_from_file("alignments.txt")
+        return random.choice(alignments)
+
+def random_class(classes):
         #random choose class (consider probability based on race?)
-        #random choose alignment
-        #go to stat calc
+        classes = get_txt_from_file("classes.txt")
+        return random.choice(classes)
+
 
 
 def input_fields():
