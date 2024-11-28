@@ -9,8 +9,10 @@ def main():
         choice = input(f"{start_msg}").lower()
         if choice == "r":
             random_generate
-        if choice == "i":
+        elif choice == "i":
             input_fields
+        else:
+            print("Invalid input. Please try again")
 
 
 def random_generate():
@@ -18,6 +20,7 @@ def random_generate():
         #random choose race 
         #random choose class (consider probability based on race?)
         #random choose alignment
+        #go to stat calc
 
 
 def input_fields():
