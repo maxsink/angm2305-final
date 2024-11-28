@@ -4,13 +4,11 @@ import random
 
 #if random generate
     #random choose race 
-    #random generate name from dict list for race
     #random choose class (consider probability based on race?)
     #random choose alignment
 
 #if input fields
     #what field would you like to input? (provide list) 
-        #name
         #race
         #class
         #alignment
@@ -18,7 +16,6 @@ import random
         # cancel
     #ask for imput for specified field. store. 
     #repeat "what field would you like to input? 
-        #name
         #race
         #class
         #alignment
