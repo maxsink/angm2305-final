@@ -1,38 +1,57 @@
 import random
 
-#ask to fully random generate or input fields
+def main():
+    #ask to fully random generate or input fields
+    start_msg = ("Enter 'r' to fully randomly generate a character sheet or 'i' to input fields.")
 
-#if random generate
-    #random choose race 
-    #random choose class (consider probability based on race?)
-    #random choose alignment
+    while True:
+        print() #for cleanliness
+        choice = input(f"{start_msg}").lower()
+        if choice == "r":
+            random_generate
+        if choice == "i":
+            input_fields
 
-#if input fields
-    #what field would you like to input? (provide list) 
-        #race
-        #class
-        #alignment
-        #stats
-        # cancel
-    #ask for imput for specified field. store. 
-    #repeat "what field would you like to input? 
-        #race
-        #class
-        #alignment
-        #stats
-        # done (select to random generate unspecified fields)
-    #if "done" selected: "Y/N to confirm: unspecified fields will be randomly generated"
-        #Y = randomly generate and compile file  
-        #N = repeat from line 18 "what field would you like to input"
 
-#calculate stats
-    #strength
-    #dexterity
-    #constitution
-    #intelligence
-    #wisdom
-    #charisma
+def random_generate():
+    #if random generate
+        #random choose race 
+        #random choose class (consider probability based on race?)
+        #random choose alignment
 
-#generate character sheet file with info
-    #place and format information in character sheet
-    #save as character name.jpg
+
+def input_fields():
+    #if input fields
+        #what field would you like to input? (provide list) 
+            #race
+            #class
+            #alignment
+            #stats
+            # cancel
+        #ask for imput for specified field. store. 
+        #repeat "what field would you like to input? 
+            #race
+            #class
+            #alignment
+            #stats
+            # done (select to random generate unspecified fields)
+        #if "done" selected: "Y/N to confirm: unspecified fields will be randomly generated"
+            #Y = randomly generate and compile file  
+            #N = repeat from line 18 "what field would you like to input"
+
+def stat_calc():
+    #calculate stats
+        #strength
+        #dexterity
+        #constitution
+        #intelligence
+        #wisdom
+        #charisma
+
+def sheet_generation():
+    #generate character sheet file with info
+        #place and format information in character sheet
+        #save as character name.jpg
+
+if __name__ == "__main__":
+    main()
