@@ -58,7 +58,15 @@ def random_generate(races, classes, alignments, ability_scores):
     race = random.choice(races)
     character_class = random.choice(classes)
     alignment = random.choice(alignments)
-    stat_assign()
+    ability_scores = {
+        "Strength": roll_ability_score(),
+        "Dexterity": roll_ability_score(),
+        "Constitution": roll_ability_score(),
+        "Intelligence": roll_ability_score(),
+        "Wisdom": roll_ability_score(),
+        "Charisma": roll_ability_score()
+    }    
+
     print(f"Randomly generated character details:")
     print(f"Race: {race}")
     print(f"Class: {character_class}")
@@ -71,15 +79,6 @@ def roll_ability_score():
     rolls.sort()  # Sort the rolls to easily drop the lowest
     return sum(rolls[1:])  # Sum the highest 3 rolls
 
-def stat_assign(ability_scores):
-    ability_scores = {
-        "Strength": roll_ability_score(),
-        "Dexterity": roll_ability_score(),
-        "Constitution": roll_ability_score(),
-        "Intelligence": roll_ability_score(),
-        "Wisdom": roll_ability_score(),
-        "Charisma": roll_ability_score()
-    }    
 
 
 #if mode 1: input fields
