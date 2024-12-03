@@ -13,14 +13,11 @@ def main():
     if mode == "1":
         # Self-input phase
         print("\nSelf-Input Mode:")
-        race = input(f"Enter your race ({', '.join(races)}): ").strip()
-        character_class = input(f"Enter your class ({', '.join(classes)}): ").strip()
-        alignment = input(f"Enter your alignment ({', '.join(alignments)}): ").strip()
+        input_fields()
     elif mode == "2":
         # Randomization phase
         print("\nRandomization Mode:")
         random_generate()
-
     else:
         print("Invalid input. Please try again")
         return None
@@ -42,7 +39,7 @@ def stat_calc():
     rolls.sort()  # Sort the rolls to easily drop the lowest
     return sum(rolls[1:])  # Sum the highest 3 rolls
 
-#collect generation & store
+#if mode 2: collect generation & store
 def random_generate(races, classes, alignments):
     race = random.choice(races)
     character_class = random.choice(classes)
@@ -52,25 +49,42 @@ def random_generate(races, classes, alignments):
     print(f"Class: {character_class}")
     print(f"Alignment: {alignment}")
 
-
+#if mode 1: input fields
 def input_fields(races, alignments, classes):
-    #if input fields
-        #what field would you like to input? (provide list) 
-            #race
-            #class
-            #alignment
-            #stats
-            # cancel
-        #ask for imput for specified field. store. 
-        #repeat "what field would you like to input? 
-            #race
-            #class
-            #alignment
-            #stats
-            # done (select to random generate unspecified fields)
-        #if "done" selected: "Y/N to confirm: unspecified fields will be randomly generated"
-            #Y = randomly generate and compile file  
-            #N = repeat from line 18 "what field would you like to input"
+    #race input
+    race_input = input(f"Enter your race ({', '.join(races)}) or press Enter to randomize: ").strip()
+    if race_input:
+        race = race_input
+    else:
+        race = random.choice(races)
+        print(f"Randomly generated race: {race}")
+   
+    #class input
+    class_input = input(f"Enter your class ({', '.join(classes)}) or press Enter to randomize: ").strip()
+    if class_input:
+        character_class = class_input
+    else:
+        character_class = random.choice(classes)
+        print(f"Randomly generated class: {character_class}")
+
+    #alignment
+    alignment_input = input(f"Enter your alignment ({', '.join(alignments)}) or press Enter to randomize: ").strip()
+    if alignment_input:
+        alignment = alignment_input
+    else:
+        alignment = random.choice(alignments)
+        print(f"Randomly generated alignment: {alignment}")
+    
+    #stats
+    print("\nFor Ability Scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):")
+    for stat in ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]:
+        score_input = input(f"Enter your {stat} score (or press Enter to randomize): ").strip()
+        if score_input:
+            ability_scores[stat] = int(score_input)
+        else:
+            ability_scores[stat] = roll_ability_score()
+            print(f"Randomly generated {stat} score: {ability_scores[stat]}")
+
 
 
 def stat_assign():
