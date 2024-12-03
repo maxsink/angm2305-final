@@ -31,6 +31,7 @@ def main():
     
     # Return the character details as a dictionary
     return {
+        "Name": name,    
         "Race": race,
         "Class": character_class,
         "Alignment": alignment,
