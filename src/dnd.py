@@ -2,19 +2,14 @@ import random
 
 def main():
     #ask to fully random generate or input fields
-
-    races = get_txt_from_file("races.txt")
-    classes = get_txt_from_file("classes.txt")
-    alignments = get_txt_from_file("alignments.txt")
+    print("Welcome to the D&D Character Sheet Generator!")
+    name = input("Name your character:")
+    mode = input("Would you like to (1) Input your character manually or (2) Randomize your character? (Enter 1 or 2): ")
 
     race = None
     character_class = None
     alignment = None
     ability_scores = {}
-
-    print("Welcome to the D&D Character Sheet Generator!")
-    name = input("Name your character:")
-    mode = input("Would you like to (1) Input your character manually or (2) Randomize your character? (Enter 1 or 2): ")
 
     if mode == "1":
         # Self-input phase
@@ -24,7 +19,6 @@ def main():
         # Randomization phase
         print("\nRandomization Mode:")
         random_generate()
-        stat_assign()
     else:
         print("Invalid input. Please try again")
         return None
@@ -48,22 +42,34 @@ def get_txt_from_file(filename):
     finally:
         file.close()
 
-def roll_ability_score():
-    rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
-    rolls.sort()  # Sort the rolls to easily drop the lowest
-    return sum(rolls[1:])  # Sum the highest 3 rolls
-
 
 #if mode 2: collect generation & store
-def random_generate(races, classes, alignments):
+def random_generate(races, classes, alignments, ability_scores):
+
+    races = get_txt_from_file("races.txt")
+    classes = get_txt_from_file("classes.txt")
+    alignments = get_txt_from_file("alignments.txt")
+
+    race = None
+    character_class = None
+    alignment = None
+    ability_scores = {}
+
     race = random.choice(races)
     character_class = random.choice(classes)
     alignment = random.choice(alignments)
+    stat_assign()
     print(f"Randomly generated character details:")
     print(f"Race: {race}")
     print(f"Class: {character_class}")
     print(f"Alignment: {alignment}")
+    print(f"Stats: {ability_scores}")
  
+
+def roll_ability_score():
+    rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
+    rolls.sort()  # Sort the rolls to easily drop the lowest
+    return sum(rolls[1:])  # Sum the highest 3 rolls
 
 def stat_assign(ability_scores):
     ability_scores = {
@@ -134,4 +140,5 @@ def print_character_sheet(character):
         #save as character name.jpg
 
 if __name__ == "__main__":
-    main()
+    character = main()
+ 
