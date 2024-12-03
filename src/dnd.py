@@ -37,6 +37,10 @@ def get_txt_from_file(filename):
     finally:
         file.close()
 
+def stat_calc():
+    rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
+    rolls.sort()  # Sort the rolls to easily drop the lowest
+    return sum(rolls[1:])  # Sum the highest 3 rolls
 
 #collect generation & store
 def random_generate(races, classes, alignments):
@@ -68,17 +72,16 @@ def input_fields(races, alignments, classes):
             #Y = randomly generate and compile file  
             #N = repeat from line 18 "what field would you like to input"
 
-def stat_calc():
-    rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
-    rolls.sort()  # Sort the rolls to easily drop the lowest
-    return sum(rolls[1:])  # Sum the highest 3 rolls
-    #assign stats
-        #strength
-        #dexterity
-        #constitution
-        #intelligence
-        #wisdom
-        #charisma
+
+def stat_assign():
+    ability_scores = {
+        "Strength": stat_calc(),
+        "Dexterity": stat_calc(),
+        "Constitution": stat_calc(),
+        "Intelligence": stat_calc(),
+        "Wisdom": stat_calc(),
+        "Charisma": stat_calc()
+    }    
 
 def sheet_generation():
     #generate character sheet file with info
