@@ -4,6 +4,10 @@ def main():
     #ask to fully random generate or input fields
     start_msg = ("Enter 'r' to fully randomly generate a character sheet or 'i' to input fields.")
 
+    races = get_txt_from_file("races.txt")
+    classes = get_txt_from_file("classes.txt")
+    alignments = get_txt_from_file("alignments.txt")
+
     while True:
         print() #for cleanliness
         choice = input(f"{start_msg}").lower()
@@ -27,10 +31,14 @@ def get_txt_from_file(filename):
 
 
 #collect generation & store
-def random_generate():
-     random_race()
-     random_alignment()
-     random_class()
+def random_generate(races, classes, alignments):
+    race = random.choice(races)
+    character_class = random.choice(classes)
+    alignment = random.choice(alignments)
+    print(f"Randomly generated character details:")
+    print(f"Race: {race}")
+    print(f"Class: {character_class}")
+    print(f"Alignment: {alignment}")
 
 def random_race(races):
         #random choose race 
