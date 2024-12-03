@@ -2,21 +2,29 @@ import random
 
 def main():
     #ask to fully random generate or input fields
-    start_msg = ("Enter 'r' to fully randomly generate a character sheet or 'i' to input fields.")
 
     races = get_txt_from_file("races.txt")
     classes = get_txt_from_file("classes.txt")
     alignments = get_txt_from_file("alignments.txt")
 
-    while True:
-        print() #for cleanliness
-        choice = input(f"{start_msg}").lower()
-        if choice == "r":
-            random_generate()
-        elif choice == "i":
-            input_fields()
-        else:
-            print("Invalid input. Please try again")
+    print("Welcome to the D&D Character Sheet Generator!")
+    mode = input("Would you like to (1) Input your character manually or (2) Randomize your character? (Enter 1 or 2): ")
+
+    if mode == "1":
+        # Self-input phase
+        print("\nSelf-Input Mode:")
+        race = input(f"Enter your race ({', '.join(races)}): ").strip()
+        character_class = input(f"Enter your class ({', '.join(classes)}): ").strip()
+        alignment = input(f"Enter your alignment ({', '.join(alignments)}): ").strip()
+    elif mode == "2":
+        # Randomization phase
+        print("\nRandomization Mode:")
+        random_generate()
+
+    else:
+        print("Invalid input. Please try again")
+        return None
+
 
 
 def get_txt_from_file(filename):
@@ -40,24 +48,8 @@ def random_generate(races, classes, alignments):
     print(f"Class: {character_class}")
     print(f"Alignment: {alignment}")
 
-def random_race(races):
-        #random choose race 
-        races = get_txt_from_file("races.txt")
-        return random.choice(races)
 
-def random_alignment(alignments):
-        #random choose alignments 
-        alignments = get_txt_from_file("alignments.txt")
-        return random.choice(alignments)
-
-def random_class(classes):
-        #random choose class (consider probability based on race?)
-        classes = get_txt_from_file("classes.txt")
-        return random.choice(classes)
-
-
-
-def input_fields():
+def input_fields(races, alignments, classes):
     #if input fields
         #what field would you like to input? (provide list) 
             #race
@@ -77,7 +69,10 @@ def input_fields():
             #N = repeat from line 18 "what field would you like to input"
 
 def stat_calc():
-    #calculate stats
+    rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
+    rolls.sort()  # Sort the rolls to easily drop the lowest
+    return sum(rolls[1:])  # Sum the highest 3 rolls
+    #assign stats
         #strength
         #dexterity
         #constitution
