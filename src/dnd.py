@@ -7,7 +7,13 @@ def main():
     classes = get_txt_from_file("classes.txt")
     alignments = get_txt_from_file("alignments.txt")
 
+    race = None
+    character_class = None
+    alignment = None
+    ability_scores = {}
+
     print("Welcome to the D&D Character Sheet Generator!")
+    name = input("Name your character:")
     mode = input("Would you like to (1) Input your character manually or (2) Randomize your character? (Enter 1 or 2): ")
 
     if mode == "1":
@@ -18,11 +24,18 @@ def main():
         # Randomization phase
         print("\nRandomization Mode:")
         random_generate()
+        stat_assign()
     else:
         print("Invalid input. Please try again")
         return None
-
-
+    
+    # Return the character details as a dictionary
+    return {
+        "Race": race,
+        "Class": character_class,
+        "Alignment": alignment,
+        "Ability Scores": ability_scores
+    }
 
 def get_txt_from_file(filename):
     try:
@@ -34,10 +47,11 @@ def get_txt_from_file(filename):
     finally:
         file.close()
 
-def stat_calc():
+def roll_ability_score():
     rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
     rolls.sort()  # Sort the rolls to easily drop the lowest
     return sum(rolls[1:])  # Sum the highest 3 rolls
+
 
 #if mode 2: collect generation & store
 def random_generate(races, classes, alignments):
@@ -48,9 +62,21 @@ def random_generate(races, classes, alignments):
     print(f"Race: {race}")
     print(f"Class: {character_class}")
     print(f"Alignment: {alignment}")
+ 
+
+def stat_assign(ability_scores):
+    ability_scores = {
+        "Strength": roll_ability_score(),
+        "Dexterity": roll_ability_score(),
+        "Constitution": roll_ability_score(),
+        "Intelligence": roll_ability_score(),
+        "Wisdom": roll_ability_score(),
+        "Charisma": roll_ability_score()
+    }    
+
 
 #if mode 1: input fields
-def input_fields(races, alignments, classes):
+def input_fields(races, alignments, classes, ability_scores):
     #race input
     race_input = input(f"Enter your race ({', '.join(races)}) or press Enter to randomize: ").strip()
     if race_input:
@@ -76,7 +102,7 @@ def input_fields(races, alignments, classes):
         print(f"Randomly generated alignment: {alignment}")
     
     #stats
-    print("\nFor Ability Scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):")
+        print("\nFor Ability Scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):")
     for stat in ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]:
         score_input = input(f"Enter your {stat} score (or press Enter to randomize): ").strip()
         if score_input:
@@ -87,17 +113,21 @@ def input_fields(races, alignments, classes):
 
 
 
-def stat_assign():
-    ability_scores = {
-        "Strength": stat_calc(),
-        "Dexterity": stat_calc(),
-        "Constitution": stat_calc(),
-        "Intelligence": stat_calc(),
-        "Wisdom": stat_calc(),
-        "Charisma": stat_calc()
-    }    
 
-def sheet_generation():
+def print_character_sheet(character):
+    if character:
+        print("\n--- Character Sheet ---")
+        for key, value in character.items():
+            if key == "Ability Scores":
+                print(f"{key}:")
+                for stat, score in value.items():
+                    print(f"  {stat}: {score}")
+            else:
+                print(f"{key}: {value}")
+        print("\nCharacter sheet generated successfully!")
+
+
+#def txtfile_generation():
     #generate character sheet file with info
         #place and format information in character sheet
         #save as character name.jpg
