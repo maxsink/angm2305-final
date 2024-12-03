@@ -118,8 +118,6 @@ def input_fields(races, alignments, classes, ability_scores):
             print(f"Randomly generated {stat} score: {ability_scores[stat]}")
 
 
-
-
 def print_character_sheet(character):
     if character:
         print("\n--- Character Sheet ---")
@@ -140,4 +138,4 @@ def print_character_sheet(character):
 
 if __name__ == "__main__":
     character = main()
- 
+    print_character_sheet(character)
