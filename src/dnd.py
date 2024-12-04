@@ -11,6 +11,7 @@ def main():
     classes = get_txt_from_file("classes.txt")
     alignments = get_txt_from_file("alignments.txt")
 
+    #initialize variables as empty
     race = None
     character_class = None
     alignment = None
@@ -45,6 +46,7 @@ def get_txt_from_file(filename):
     except FileNotFoundError:
         print(f"Error: The file {filename} was not found. Creating Empty File.")
         file = open(filename, 'w')
+        quit() #exits code - code cannot execute without dictionary files
     finally:
         file.close()
 
@@ -67,8 +69,9 @@ def random_generate():
         "Intelligence": roll_ability_score(),
         "Wisdom": roll_ability_score(),
         "Charisma": roll_ability_score()
-    }    
-
+    }
+   
+    #show generated character details
     print(f"Randomly generated character details:")
     print(f"Race: {race}")
     print(f"Class: {character_class}")
@@ -78,11 +81,11 @@ def random_generate():
     return race, character_class, alignment, ability_scores
  
 
+#use 4d6 method to calculate stats
 def roll_ability_score():
     rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
     rolls.sort()  # Sort the rolls to drop the lowest
     return sum(rolls[1:])  # Sum the highest 3 rolls
-
 
 
 #if mode 1: input fields
@@ -103,7 +106,7 @@ def input_fields(races, alignments, classes):
         character_class = random.choice(classes)
         print(f"Randomly generated class: {character_class}")
 
-    #alignment
+    #alignment input
     alignment_input = input(f"Enter your alignment ({', '.join(alignments)}) or press Enter to randomize: ").strip()
     if alignment_input:
         alignment = alignment_input
@@ -111,7 +114,7 @@ def input_fields(races, alignments, classes):
         alignment = random.choice(alignments)
         print(f"Randomly generated alignment: {alignment}")
     
-    #stats
+    #stat input
     ability_scores = {}
     print("\nFor Ability Scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):")
     for stat in ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]:
@@ -124,7 +127,7 @@ def input_fields(races, alignments, classes):
 
     return race, character_class, alignment, ability_scores
 
-
+#print character sheet to terminal
 def print_character_sheet(character, name):
     if character:
         print(f"\n--- {name} ---\n--- Character Sheet ---")
@@ -154,6 +157,7 @@ def save_character_sheet(character, name ):
             else:
                 file.write(f"{key}: {value}\n")
     print(f"\nCharacter sheet saved to {filename}")
+
 
 if __name__ == "__main__":
     character = main()
