@@ -6,7 +6,7 @@ def main():
     name = input("Name your character:")
     mode = input("Would you like to (1) Input your character manually or (2) Randomize your character? (Enter 1 or 2): ")
  
- # Load the options from the text files
+    # Load the options from the text files
     races = get_txt_from_file("races.txt")
     classes = get_txt_from_file("classes.txt")
     alignments = get_txt_from_file("alignments.txt")
@@ -86,7 +86,7 @@ def roll_ability_score():
 
 
 #if mode 1: input fields
-def input_fields(races, alignments, classes, ability_scores):
+def input_fields(races, alignments, classes):
     #race input
     race_input = input(f"Enter your race ({', '.join(races)}) or press Enter to randomize: ").strip()
     if race_input:
@@ -127,7 +127,7 @@ def input_fields(races, alignments, classes, ability_scores):
 
 def print_character_sheet(character, name):
     if character:
-        print("\n--- {name} ---\n--- Character Sheet ---")
+        print(f"\n--- {name} ---\n--- Character Sheet ---")
         for key, value in character.items():
             if key == "Ability Scores":
                 print(f"{key}:")
