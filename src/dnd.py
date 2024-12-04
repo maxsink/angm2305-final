@@ -141,9 +141,22 @@ def print_character_sheet(character, name):
 #def txtfile_generation():
     #generate character sheet file with info
         #place and format information in character sheet
-        #save as character name.jpg
+        #save as character name.txt
+def save_character_sheet(character, name ):
+    filename=(f"{name}_CharacterSheet.txt")
+    with open(filename, 'w') as file:
+        file.write("--- Character Sheet ---\n")
+        for key, value in character.items():
+            if key == "Ability Scores":
+                file.write(f"{key}:\n")
+                for stat, score in value.items():
+                    file.write(f"  {stat}: {score}\n")
+            else:
+                file.write(f"{key}: {value}\n")
+    print(f"\nCharacter sheet saved to {filename}")
 
 if __name__ == "__main__":
     character = main()
     if character:
         print_character_sheet(character, character['Name'])
+        save_character_sheet(character, character['Name'])
