@@ -1,7 +1,7 @@
 # DND 5E Character Sheet Generator
 
 ## Demo
-Demo Video: <URL>
+Demo Video: https://youtu.be/PVy8WW6mJwQ 
 
 ## GitHub Repository
 GitHub Repo: https://github.com/maxsink/angm2305-final.git
