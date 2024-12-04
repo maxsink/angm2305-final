@@ -44,17 +44,13 @@ def get_txt_from_file(filename):
 
 
 #if mode 2: collect generation & store
-def random_generate(races, classes, alignments, ability_scores):
-
+def random_generate():
+    #load options
     races = get_txt_from_file("races.txt")
     classes = get_txt_from_file("classes.txt")
     alignments = get_txt_from_file("alignments.txt")
 
-    race = None
-    character_class = None
-    alignment = None
-    ability_scores = {}
-
+    #random generation
     race = random.choice(races)
     character_class = random.choice(classes)
     alignment = random.choice(alignments)
@@ -72,11 +68,13 @@ def random_generate(races, classes, alignments, ability_scores):
     print(f"Class: {character_class}")
     print(f"Alignment: {alignment}")
     print(f"Stats: {ability_scores}")
+
+    return race, character_class, alignment, ability_scores
  
 
 def roll_ability_score():
     rolls = [random.randint(1, 6) for _ in range(4)]  # Roll 4d6
-    rolls.sort()  # Sort the rolls to easily drop the lowest
+    rolls.sort()  # Sort the rolls to drop the lowest
     return sum(rolls[1:])  # Sum the highest 3 rolls
 
 
@@ -108,7 +106,8 @@ def input_fields(races, alignments, classes, ability_scores):
         print(f"Randomly generated alignment: {alignment}")
     
     #stats
-        print("\nFor Ability Scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):")
+    ability_scores = {}
+    print("\nFor Ability Scores (Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):")
     for stat in ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]:
         score_input = input(f"Enter your {stat} score (or press Enter to randomize): ").strip()
         if score_input:
@@ -116,6 +115,8 @@ def input_fields(races, alignments, classes, ability_scores):
         else:
             ability_scores[stat] = roll_ability_score()
             print(f"Randomly generated {stat} score: {ability_scores[stat]}")
+
+    return race, character_class, alignment, ability_scores
 
 
 def print_character_sheet(character):
@@ -138,4 +139,5 @@ def print_character_sheet(character):
 
 if __name__ == "__main__":
     character = main()
-    print_character_sheet(character)
+    if character:
+        print_character_sheet(character)
