@@ -3,7 +3,7 @@ import random
 def main():
     #ask to fully random generate or input fields
     print("Welcome to the D&D Character Sheet Generator!")
-    name = input("Name your character:")
+    name = input("Name your character: ")
     mode = input("Would you like to (1) Input your character manually or (2) Randomize your character? (Enter 1 or 2): ")
  
     # Load the options from the text files
@@ -146,4 +146,4 @@ def print_character_sheet(character, name):
 if __name__ == "__main__":
     character = main()
     if character:
-        print_character_sheet(character)
+        print_character_sheet(character, character['Name'])
