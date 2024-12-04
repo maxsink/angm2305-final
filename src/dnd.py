@@ -5,6 +5,11 @@ def main():
     print("Welcome to the D&D Character Sheet Generator!")
     name = input("Name your character:")
     mode = input("Would you like to (1) Input your character manually or (2) Randomize your character? (Enter 1 or 2): ")
+ 
+ # Load the options from the text files
+    races = get_txt_from_file("races.txt")
+    classes = get_txt_from_file("classes.txt")
+    alignments = get_txt_from_file("alignments.txt")
 
     race = None
     character_class = None
@@ -14,11 +19,11 @@ def main():
     if mode == "1":
         # Self-input phase
         print("\nSelf-Input Mode:")
-        input_fields()
+        race, character_class, alignment, ability_scores = input_fields(races, alignments, classes)
     elif mode == "2":
         # Randomization phase
         print("\nRandomization Mode:")
-        random_generate()
+        race, character_class, alignment, ability_scores = random_generate()
     else:
         print("Invalid input. Please try again")
         return None
@@ -38,7 +43,8 @@ def get_txt_from_file(filename):
         lines = file.readlines()
         return [line.strip() for line in lines if line.strip()]
     except FileNotFoundError:
-         file = open(filename, 'w')
+        print(f"Error: The file {filename} was not found. Creating Empty File.")
+        file = open(filename, 'w')
     finally:
         file.close()
 
@@ -119,9 +125,9 @@ def input_fields(races, alignments, classes, ability_scores):
     return race, character_class, alignment, ability_scores
 
 
-def print_character_sheet(character):
+def print_character_sheet(character, name):
     if character:
-        print("\n--- Character Sheet ---")
+        print("\n--- {name} ---\n--- Character Sheet ---")
         for key, value in character.items():
             if key == "Ability Scores":
                 print(f"{key}:")
